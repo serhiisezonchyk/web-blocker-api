@@ -23,8 +23,11 @@ export class AuthController {
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse()
-  async signUp(@Body() body: SignUpBodyDto, @Res() res: Response) {
-    const {accessToken} = await this.authService.signUp(
+  async signUp(
+    @Body() body: SignUpBodyDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { accessToken } = await this.authService.signUp(
       body.email,
       body.password,
     );
