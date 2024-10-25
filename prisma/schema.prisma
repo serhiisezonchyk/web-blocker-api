@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id      String   @id @default(uuid())
-  email   String   @unique
-  hash    String
-  salt    String
-  Account Account?
+  id        String     @id @default(uuid())
+  email     String     @unique
+  hash      String
+  salt      String
+  Account   Account?
+  blockList BlockList?
 }
 
 model Account {
@@ -26,4 +27,27 @@ model Account {
   isBlockingEnabled Boolean
   owner             User    @relation(fields: [ownerId], references: [id])
   ownerId           String  @unique
+}
+
+model BlockList {
+  id      String      @id @default(uuid())
+  owner   User        @relation(fields: [ownerId], references: [id])
+  ownerId String      @unique
+  items   BlockItem[]
+}
+
+model BlockItem {
+  id String @id @default(uuid())
+
+  blockList   BlockList @relation(fields: [blockListId], references: [id])
+  blockListId String
+
+  type      BlockItemType
+  data      String
+  createdAt DateTime      @default(now())
+}
+
+enum BlockItemType {
+  Website
+  KeyWord
 }
