@@ -12,8 +12,8 @@ import {
 import { GetSessionInfoDto, SignInBodyDto, SignUpBodyDto } from './dto';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { Response } from 'express';
-import { CookieService } from './cookie.service';
-import { AuthGuard } from './auth.guard';
+import { CookieService } from './cookies/cookie.service';
+import { AuthGuard } from '../common/guards/auth.guard';
 import { SessionInfo } from './session-info.decorator';
 
 @Controller('auth')

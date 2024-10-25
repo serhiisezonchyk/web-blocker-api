@@ -18,9 +18,9 @@ import {
   BlockListQueryDto,
 } from './dto';
 import { query } from 'express';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { SessionInfo } from 'src/auth/session-info.decorator';
 import { GetSessionInfoDto } from 'src/auth/dto';
+import { AuthGuard } from 'src/common/guards/auth.guard';
+import { SessionInfo } from 'src/common/decorators/session-info.decorator';
 
 @Controller('block-list')
 @UseGuards(AuthGuard)

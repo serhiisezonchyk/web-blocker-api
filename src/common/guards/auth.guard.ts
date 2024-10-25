@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { CookieService } from './cookie.service';
+import { CookieService } from '../../auth/cookies/cookie.service';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
