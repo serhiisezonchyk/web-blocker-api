@@ -14,8 +14,16 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  email String @unique
-  hash  String
-  salt  String
+  id      String   @id @default(uuid())
+  email   String   @unique
+  hash    String
+  salt    String
+  Account Account?
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  isBlockingEnabled Boolean
+  owner             User    @relation(fields: [ownerId], references: [id])
+  ownerId           String  @unique
 }
