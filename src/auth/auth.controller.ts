@@ -14,6 +14,7 @@ import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { Response } from 'express';
 import { CookieService } from './cookie.service';
 import { AuthGuard } from './auth.guard';
+import { SessionInfo } from './session-info.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -54,14 +55,16 @@ export class AuthController {
   @ApiOkResponse()
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
-  signOut() {}
+  signOut(@Res({ passthrough: true }) res: Response) {
+    this.cookieService.removeToken(res);
+  }
 
   @Get('session')
   @ApiOkResponse({
     type: GetSessionInfoDto,
   })
   @UseGuards(AuthGuard)
-  getSessionInfo() {
-    return null;
+  getSessionInfo(@SessionInfo() session: GetSessionInfoDto) {
+    return session;
   }
 }
