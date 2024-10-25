@@ -14,7 +14,7 @@ import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { Response } from 'express';
 import { CookieService } from './cookies/cookie.service';
 import { AuthGuard } from '../common/guards/auth.guard';
-import { SessionInfo } from './session-info.decorator';
+import { SessionInfo } from '../common/decorators/session-info.decorator';
 
 @Controller('auth')
 export class AuthController {
