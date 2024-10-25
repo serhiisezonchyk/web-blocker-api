@@ -100,3 +100,7 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 
 docker compose up
+
+
+TODO: Roles
+ZOD

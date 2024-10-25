@@ -8,18 +8,13 @@ class HelloWorldDTO {
 }
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private dbService: DbService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @ApiOkResponse({
     type: HelloWorldDTO,
   })
   async getHello(): Promise<HelloWorldDTO> {
-    const users = await this.dbService.user.findMany();
-    console.log(users);
-    return { message: 'wdfwed' };
+    return { message: 'Hello' };
   }
 }
