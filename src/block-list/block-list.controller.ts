@@ -54,7 +54,7 @@ export class BlockListController {
   })
   // removeBlockItem(@Param(ParseIntPipe) id: number) {}
   async removeBlockItem(
-    @Param() id: string,
+    @Param("id") id: string,
     @SessionInfo() session: GetSessionInfoDto,
   ): Promise<BlockItemDto> {
     return this.blockListService.removeItem(session.id, id);
