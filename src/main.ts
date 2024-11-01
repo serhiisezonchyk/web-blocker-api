@@ -11,8 +11,11 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document);
 
   app.use(cookieParser());
-  app.enableCors({
-    origin: ['http://localhost:3000'],
+  const origins: string[] = [process.env.EXTENSION_URL, process.env.CLIENT_URL].filter(
+    (url): url is string => typeof url === 'string'
+  );
+    app.enableCors({
+    origin: origins,
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());

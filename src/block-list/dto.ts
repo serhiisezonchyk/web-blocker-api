@@ -3,7 +3,7 @@ import { $Enums, BlockItemType } from '@prisma/client';
 import { IsIn, IsOptional } from 'class-validator';
 export class BlockItemDto {
   @ApiProperty()
-  id: string;
+  id: number;
 
   @ApiProperty()
   blockListId: string;

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
 import { SkipThrottle } from '@nestjs/throttler';
 import { GetSessionInfoDto } from 'src/auth/dto';
@@ -33,7 +33,7 @@ export class BlockListController {
     type: BlockItemDto,
   })
   // removeBlockItem(@Param(ParseIntPipe) id: number) {}
-  async removeBlockItem(@Param('id') id: string, @SessionInfo() session: GetSessionInfoDto): Promise<BlockItemDto> {
+  async removeBlockItem(@Param('id', new ParseIntPipe()) id: number, @SessionInfo() session: GetSessionInfoDto): Promise<BlockItemDto> {
     return this.blockListService.removeItem(session.id, id);
   }
 }

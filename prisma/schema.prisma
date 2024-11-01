@@ -37,7 +37,7 @@ model BlockList {
 }
 
 model BlockItem {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
 
   blockList   BlockList @relation(fields: [blockListId], references: [id])
   blockListId String

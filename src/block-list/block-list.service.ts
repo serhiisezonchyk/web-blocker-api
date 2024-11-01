@@ -31,6 +31,7 @@ export class BlockListService {
         ownerId: userId,
       },
     });
+
     const existingItem = await this.dbService.blockItem.findFirst({
       where: {
         blockListId: blockList.id,
@@ -50,7 +51,7 @@ export class BlockListService {
     });
   }
 
-  async removeItem(userId: string, itemId: string) {
+  async removeItem(userId: string, itemId: number) {
     const blockList = await this.dbService.blockList.findUniqueOrThrow({
       where: { ownerId: userId },
     });

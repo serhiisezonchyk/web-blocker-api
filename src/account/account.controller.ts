@@ -5,7 +5,9 @@ import { SessionInfo } from 'src/common/decorators/session-info.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { AccountService } from './account.service';
 import { AccountDto, PatchAccountDto } from './dto';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('account')
 @UseGuards(AuthGuard)
 export class AccountController {
