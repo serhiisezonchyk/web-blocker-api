@@ -17,11 +17,12 @@ import {
   BlockListDto,
   BlockListQueryDto,
 } from './dto';
-import { query } from 'express';
 import { GetSessionInfoDto } from 'src/auth/dto';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { SessionInfo } from 'src/common/decorators/session-info.decorator';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('block-list')
 @UseGuards(AuthGuard)
 export class BlockListController {

@@ -15,6 +15,7 @@ import { Response } from 'express';
 import { CookieService } from './cookies/cookie.service';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { SessionInfo } from '../common/decorators/session-info.decorator';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('auth')
 export class AuthController {
@@ -24,8 +25,8 @@ export class AuthController {
   ) {}
 
   @Post('sign-up')
-  @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse()
+  @HttpCode(HttpStatus.CREATED)
   async signUp(
     @Body() body: SignUpBodyDto,
     @Res({ passthrough: true }) res: Response,
@@ -44,13 +45,14 @@ export class AuthController {
     @Body() body: SignInBodyDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const { accessToken } = await this.authService.signUp(
+    const { accessToken } = await this.authService.signIn(
       body.email,
       body.password,
     );
     this.cookieService.setToken(res, accessToken);
   }
 
+  @SkipThrottle()
   @Post('sign-out')
   @ApiOkResponse()
   @HttpCode(HttpStatus.OK)
@@ -59,6 +61,7 @@ export class AuthController {
     this.cookieService.removeToken(res);
   }
 
+  @SkipThrottle()
   @Get('session')
   @ApiOkResponse({
     type: GetSessionInfoDto,

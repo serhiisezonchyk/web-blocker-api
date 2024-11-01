@@ -15,6 +15,7 @@ export class AppController {
     type: HelloWorldDTO,
   })
   async getHello(): Promise<HelloWorldDTO> {
-    return { message: 'Hello' };
+
+    return { message: this.appService.getHello() };
   }
 }
