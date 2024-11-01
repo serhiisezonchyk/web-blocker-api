@@ -1,6 +1,5 @@
-import { Account } from '@prisma/client';
-import { PatchAccountDto } from './dto';
 import { Injectable } from '@nestjs/common';
+import { Account } from '@prisma/client';
 import { DbService } from 'src/db/db.service';
 
 @Injectable()
@@ -19,10 +18,7 @@ export class AccountService {
       where: { ownerId: userId },
     });
   }
-  async pathAccount(
-    userId: string,
-    patchAccountDto: Partial<Pick<Account, 'isBlockingEnabled'>>,
-  ) {
+  async pathAccount(userId: string, patchAccountDto: Partial<Pick<Account, 'isBlockingEnabled'>>) {
     return this.dbService.account.update({
       where: {
         ownerId: userId,

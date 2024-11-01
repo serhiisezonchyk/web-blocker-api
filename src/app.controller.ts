@@ -1,7 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 import { ApiOkResponse, ApiProperty } from '@nestjs/swagger';
-import { DbService } from './db/db.service';
+import { AppService } from './app.service';
 class HelloWorldDTO {
   @ApiProperty()
   message: string;
@@ -15,7 +14,6 @@ export class AppController {
     type: HelloWorldDTO,
   })
   async getHello(): Promise<HelloWorldDTO> {
-
     return { message: this.appService.getHello() };
   }
 }

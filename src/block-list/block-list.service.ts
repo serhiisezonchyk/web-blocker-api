@@ -1,4 +1,3 @@
-import { query } from 'express';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { DbService } from 'src/db/db.service';
 import { AddBlockItemDto, BlockListQueryDto } from './dto';
@@ -41,9 +40,7 @@ export class BlockListService {
     });
 
     if (existingItem) {
-      throw new ConflictException(
-        `An item with the same ${data.type} already exists in your block list.`,
-      );
+      throw new ConflictException(`An item with the same ${data.type} already exists in your block list.`);
     }
     return this.dbService.blockItem.create({
       data: {
